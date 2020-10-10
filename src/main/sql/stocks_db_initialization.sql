@@ -20,13 +20,10 @@ INSERT INTO quotes (symbol,time,price) VALUES ('GOOG','2001-02-21 00:00:01','252
 INSERT INTO quotes (symbol,time,price) VALUES ('APPL','2004-7-31 00:00:01','121.21');
 INSERT INTO quotes (symbol,time,price) VALUES ('AMZN','2002-01-31 00:00:01','75.34');
 
-
 INSERT INTO quotes (symbol,time,price) VALUES ('APPL','2013-03-29 00:00:01','411.14');
 INSERT INTO quotes (symbol,time,price) VALUES ('APPL','2019-02-03 00:00:01','722.35');
 INSERT INTO quotes (symbol,time,price) VALUES ('IBM','2000-09-01 00:00:01','178.18');
 INSERT INTO quotes (symbol,time,price) VALUES ('GOOG','2012-03-01 00:00:01','771.42');
-
-
 
 INSERT INTO quotes (symbol,time,price) VALUES ('IBM','2011-11-11 00:00:01','185.00');
 INSERT INTO quotes (symbol,time,price) VALUES ('GOOG','2007-10-31 00:00:01','431.35');

@@ -1,5 +1,11 @@
 package edu.rseymour.advancedjava.services;
 
+import edu.rseymour.advancedjava.model.StockQuote;
+import edu.rseymour.advancedjava.util.Interval;
+
+import java.util.Calendar;
+import java.util.List;
+
 /**
  * A factory that returns a <CODE>StockService</CODE> instance.
  */

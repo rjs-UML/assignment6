@@ -83,16 +83,11 @@ public class DatabaseStockService implements StockService {
     @Override
     public List<StockQuote> getQuote(String symbol, Calendar from, Calendar until, Interval interval) throws StockServiceException {
         List<StockQuote> stockQuotes = null;
-
         try {
             Connection connection = DatabaseUtils.getConnection();
             Statement statement = connection.createStatement();
-
-            // create a date format as defined in the abstract class StockData
-            // SimpleDateFormat objects let you define how a date is represented
-            // .format() accepts a Calendar/Date obj and returns text
-            // .parse() accepts text and returns a Calendar/Date object
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(StockData.dateFormat);
+
             String fromString = simpleDateFormat.format(from.getTime());
             String untilString = simpleDateFormat.format(until.getTime());
 
@@ -100,7 +95,7 @@ public class DatabaseStockService implements StockService {
                     + "and time BETWEEN '" + fromString + "' and '" + untilString + "'";
 
             ResultSet resultSet = statement.executeQuery(queryString);
-            stockQuotes = new ArrayList<>(resultSet.getFetchSize());
+            stockQuotes = new ArrayList<>();
             StockQuote previousStockQuote = null;
 
             // The resultSet is currently a table containing all stock quotes filtered using
@@ -109,42 +104,33 @@ public class DatabaseStockService implements StockService {
             // Each iteration creates a StockQuote object and adds it to the ArrayList
 
             Calendar calendar = Calendar.getInstance();
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 String symbolValue = resultSet.getString("symbol");
-
-                // returns a java.sql.timestamp instance from the value stored in the
-                // time column that represents the number of milliseconds from Jan 1, 1970 to
-                // the 'time' column value for the current tuple
-                Timestamp timestamp = resultSet.getTimestamp("time");
-
-                // sets time for the calendar object using the timestamp
-                calendar.setTimeInMillis(timestamp.getTime());
-
-                // retrieve value in 'price' column as BigDecimal object
+                Timestamp timeStamp = resultSet.getTimestamp("time");
+                calendar.setTimeInMillis(timeStamp.getTime());
                 BigDecimal price = resultSet.getBigDecimal("price");
-
-                // convert the SQL timestamp into a java Date obj
                 java.util.Date time = calendar.getTime();
-
-                // create a StockQuote instance of the tuple in the current iteration
                 StockQuote currentStockQuote = new StockQuote(price, time, symbolValue);
 
-                if (previousStockQuote == null) {                   // add first iteration to ArrayList
+                if (previousStockQuote == null) { // first time through always add stockquote
+
                     stockQuotes.add(currentStockQuote);
-                } else if (isInterval(currentStockQuote.getDate(),  // if the currentStockQuote date is at least
-                        interval,                                   // 'interval' of time later than
-                        previousStockQuote.getDate())) {            // previousStockQuote, add it to the ArrayList
+
+                } else if (isInterval(currentStockQuote.getDate(),
+                        interval,
+                        previousStockQuote.getDate())) {
+
                     stockQuotes.add(currentStockQuote);
                 }
+
                 previousStockQuote = currentStockQuote;
             }
-
 
         } catch (DatabaseConnectionException | SQLException exception) {
             throw new StockServiceException(exception.getMessage(), exception);
         }
         if (stockQuotes.isEmpty()) {
-            throw new StockServiceException("There is no stock data for: " + symbol);
+            throw new StockServiceException("There is no stock data for:" + symbol);
         }
 
         return stockQuotes;

@@ -1,6 +1,6 @@
 package edu.rseymour.advancedjava.model;
 
-import jdk.nashorn.internal.ir.annotations.Immutable;
+// import jdk.nashorn.internal.ir.annotations.Immutable;
 
 import javax.validation.constraints.NotNull;
 import java.text.ParseException;
@@ -10,7 +10,7 @@ import java.util.Calendar;
  * This class is used to create a single query to a stock service.
  */
 
-@Immutable
+// @Immutable
 public class StockQuery extends StockData {
 
     private final String symbol;
@@ -24,6 +24,8 @@ public class StockQuery extends StockData {
      * A String date in yyyy/MM/dd form is parsed by the simpleDateFormat instance which
      * returns a Date instance.
      *
+     * .parse() accepts text and returns a Calendar/Date object
+     *
      * @param symbol the stock symbol.
      * @param from   the start date as a string in the form of yyyy/MM/dd
      * @param until  the end date as a string in the form of yyyy/MM/dd
@@ -36,7 +38,7 @@ public class StockQuery extends StockData {
         this.from = Calendar.getInstance();
         this.until = Calendar.getInstance();
         this.from.setTime((simpleDateFormat.parse(from)));
-        this.from.setTime((simpleDateFormat.parse(until)));
+        this.until.setTime((simpleDateFormat.parse(until)));
     }
 
     /**
