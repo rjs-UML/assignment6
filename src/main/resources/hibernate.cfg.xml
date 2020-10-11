@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/stocks?useSSL=false&amp;autoReconnect=true&amp;serverTimezone=EST</property>
+        <property name = "hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+
+        <property name="hibernate.connection.username">monty</property>
+        <property name="hibernate.connection.password">some_pass</property>
+
+        <property name="hibernate.show_sql">true</property>
+
+
+        <mapping class="edu.rseymour.advancedjava.model.Person"/>
+        <mapping class="edu.rseymour.advancedjava.model.PersonQuotes"/>
+        <mapping class="edu.rseymour.advancedjava.model.Quotes"/>
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

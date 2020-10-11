@@ -4,7 +4,7 @@ import edu.rseymour.advancedjava.model.StockQuery;
 import edu.rseymour.advancedjava.model.StockQuote;
 import edu.rseymour.advancedjava.services.StockService;
 import edu.rseymour.advancedjava.services.StockServiceException;
-import edu.rseymour.advancedjava.services.StockServiceFactory;
+import edu.rseymour.advancedjava.services.ServiceFactory;
 import edu.rseymour.advancedjava.util.Interval;
 
 
@@ -129,7 +129,7 @@ public class BasicStockQuoteApplication {
         try {
 
             StockQuery stockQuery = new StockQuery(args[0], args[1], args[2]);
-            StockService stockService = StockServiceFactory.getInstance();
+            StockService stockService = ServiceFactory.getStockServiceInstance();
             BasicStockQuoteApplication basicStockQuoteApplication =
                     new BasicStockQuoteApplication(stockService);
             basicStockQuoteApplication.displayStockQuotes(stockQuery);
