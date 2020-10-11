@@ -5,7 +5,7 @@ jobs:
       - image: 'circleci/openjdk:latest' # the primary container, where your job's commands are run
       - image: 'circleci/mysql:8.0.21'
         environment:
-          MSYSQL_DATABASE: stocks
+          MYSQL_DATABASE: stocks
           MYSQL_USER: monty
           MYSQL_PASSWORD: some_pass
     steps:
