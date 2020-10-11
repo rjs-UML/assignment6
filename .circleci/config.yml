@@ -26,8 +26,8 @@ jobs:
           name: Install MySQL CLI; Import dummy data; run an example query
           command: |
             sudo apt-get install default-mysql-client
-            mysql -h 127.0.0.1 -u monty -some_pass stocks < src/main/sql/stocks_db_initialization.sql
-            mysql -h 127.0.0.1 -u monty -some_pass --execute="SELECT * FROM stocks.person"
+            mysql -h 127.0.0.1 -u monty -psome_pass stocks < src/main/sql/stocks_db_initialization.sql
+            mysql -h 127.0.0.1 -u monty -psome_pass --execute="SELECT * FROM stocks.person"
       - store_test_results:
           path: target/surefire-reports
       - store_artifacts:
