@@ -13,6 +13,7 @@ jobs:
       - checkout # check out the code in the project directory
       - run: echo "hello cruel world" # run the `echo` command 
       - run: mysql -u monty -p
+      - run: echo "some_pass"
       - run: mvn test
       - store_test_results:
           path: target/surefire-reports
