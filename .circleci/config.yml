@@ -8,14 +8,18 @@ jobs:
           MYSQL_DATABASE: stocks
           MYSQL_USER: monty
           MYSQL_PASSWORD: some_pass
+          MYSQL_DRIVER: com.mysql.jdbc.Driver
+#          DB_URL: jdbc:mysql://localhost:3306/stocks?useSSL=false&serverTimezone=EST
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_ROOT_PASSWORD: ''
     steps:
       - checkout # check out the code in the project directory
       - run: echo "hello cruel world" # run the `echo` command 
-      - run: 
-          name: Install MySQL CLI;
-          command: |
-            sudo apt-get install default-mysql-client
-            mysql -h 127.0.0.1 -u monty -psome_pass stocks
+#     - run: 
+#          name: Install MySQL CLI;
+#          command: |
+#            sudo apt-get install default-mysql-client
+#            mysql -h 127.0.0.1 -u monty -psome_pass stocks
       - run: mvn test
       - store_test_results:
           path: target/surefire-reports
