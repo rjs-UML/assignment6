@@ -11,7 +11,11 @@ jobs:
     steps:
       - checkout # check out the code in the project directory
       - run: echo "hello cruel world" # run the `echo` command 
-      - run: sudo apt-get install default-mysql-client
+      - run: 
+          name: Install MySQL CLI;
+          command: |
+            sudo apt-get install default-mysql-client
+            mysql -h 127.0.0.1 -u monty -psome_pass stocks
       - run: mvn test
       - store_test_results:
           path: target/surefire-reports
