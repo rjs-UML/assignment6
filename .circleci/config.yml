@@ -3,32 +3,21 @@ jobs:
   build:
     docker:
       - image: 'circleci/openjdk:latest' # the primary container, where your job's commands are run
-      - image: 'circleci/mysql:8.0.21
+      - image: 'circleci/mysql:8.0.21'
         environment:
-          MSYSQL_DATABASE: stocks
+          MYSQL_ROOT_PASSWORD: Rynomite@83
+          MYSQL_DATABASE: stocks
           MYSQL_USER: monty
           MYSQL_PASSWORD: some_pass
     steps:
       - checkout # check out the code in the project directory
-      - run: echo "hello cruel world" # run the `echo` command 
-      - run: mvn test
+      - run: echo "hello cruel world" # run the `echo` command
       - run:
-          name: Waiting for MySQL to be ready
-          command: |
-            for i in `seq 1 10`;
-            do
-              nc -z 127.0.0.1 3306 && echo Success && exit 0
-              echo -n.
-              sleep 1
-            done
-            echo Failed waiting for MySQL && exit 1
-      - run:
-          name: Install MySQL CLI; Import dummy data; run an example query
+          name: Install MySQL CLI;
           command: |
             sudo apt-get install default-mysql-client
-            mysql -h 127.0.0.1 -u monty -some_pass stocks < src/main/sql/stocks_db_initialization.sql
-            mysql -h 127.0.0.1 -u monty -some_pass --execute="SELECT * FROM stocks.person"
+      - run: mvn test
       - store_test_results:
           path: target/surefire-reports
       - store_artifacts:
-          path: target/my-reports
+          path: target/my-reports            
