@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:latest # the primary container, where your job's commands are run
-      - image: circleci/mysql:8.0.21
+      - image: circleci/mysql:8.0.4
         environment:
           MYSQL_DATABASE: stocks
           MYSQL_USER: monty
