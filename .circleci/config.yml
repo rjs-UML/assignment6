@@ -8,8 +8,6 @@ jobs:
           MYSQL_DATABASE: stocks
           MYSQL_USER: monty
           MYSQL_PASSWORD: some_pass
-          MYSQL_DRIVER: com.mysql.jdbc.Driver
-          DB_URL: jdbc:mysql://localhost:3306/stocks?useSSL=false&serverTimezone=EST
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_ROOT_PASSWORD: ''
     steps:
