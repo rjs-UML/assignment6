@@ -25,9 +25,6 @@ jobs:
       - run:
           name: Install MySQL CLI
           command: sudo apt-get install default-mysql-client
-      - run:
-          name: Log in as monty
-          command: mysql -u monty -psome_pass stocks
       - run: echo "hello cruel world" # run the `echo` command
       - run: mvn test
       - store_test_results:
