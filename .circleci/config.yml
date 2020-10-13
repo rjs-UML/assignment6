@@ -25,7 +25,7 @@ jobs:
           name: Install MySQL CLI and log in as monty
           command: |
             sudo apt-get install default-mysql-client
-            mysql -u monty -psome_pass 
+            mysql -h 127.0.0.1 -u monty -psome_pass 
       - run: echo "hello cruel world" # run the `echo` command 
       - run: mvn test
       - store_test_results:
