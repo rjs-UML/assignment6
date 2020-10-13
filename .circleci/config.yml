@@ -5,10 +5,10 @@ jobs:
       - image: 'circleci/openjdk:latest' # the primary container, where your job's commands are run
       - image: circleci/mysql:8.0.21
         environment:
-          MYSQL_ROOT_PASSWORD: Rynomite@83
-          MYSQL_DATABASE: stocks
-          MYSQL_USER: monty
-          MYSQL_PASSWORD: some_pass      
+          JDBC_DRIVER: com.mysql.jdbc.Driver
+          DB_URL: jdbc:mysql://localhost:3306/stocks?useSSL=false&serverTimezone=EST
+          USER: monty
+          PASS: some_pass      
     steps:
       - checkout # check out the code in the project directory
       - run:
@@ -22,9 +22,6 @@ jobs:
               sleep 5
             done
             echo Failed waiting for MySQL && exit 1    
-#      - run:
-#          name: Install MySQL CLI
-#          command: sudo apt-get install default-mysql-client
       - run: echo "hello cruel world" # run the `echo` command
       - run: mvn test
       - store_test_results:
