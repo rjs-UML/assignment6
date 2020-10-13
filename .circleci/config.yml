@@ -1,36 +1,39 @@
 version: 2.1
 jobs:
-  MySQL:
+  build:
     docker:
+      - image: 'circleci/openjdk:latest' # the primary container, where your job's commands are run
       - image: circleci/mysql:8.0.21
         environment:
-          # MYSQL_ROOT_PASSWORD: ''
+          # MYSQL_ROOT_PASSWORD: Rynomite@83
           # MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: stocks
           MYSQL_USER: monty
-          MYSQL_PASSWORD: some_pass
-    steps:
-     - run:
-        name: Wait for Database Connection
-        # preinstalled in circleci/* docker image
-        command: dockerize -wait tcp://localhost:3306 -timeout 1m
-     - run: echo "I hope this works"
-  Java:
-    docker:
-      - image: 'circleci/openjdk:latest' # the primary container, where your job's commands are run
+          MYSQL_PASSWORD: some_pass      
     steps:
       - checkout # check out the code in the project directory
+      - run:
+      # Our primary container isn't MYSQL so run a sleep command until it's ready.
+          name: Waiting for MySQL to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 5
+            done
+            echo Failed waiting for MySQL && exit 1    
+      - run:
+          name: Install MySQL CLI; Import dummy data; run an example query
+          command: sudo apt-get install default-mysql-client  
       - run: echo "hello cruel world" # run the `echo` command 
       - run: mvn test
       - store_test_results:
           path: target/surefire-reports
       - store_artifacts:
-          path: target/my-reports
+          path: target/my-reports  
 workflows:
- version: 2
- build-deploy:
-   jobs:
-     - MySQL
-     - Java:
-         requires:
-           - MySQL
+  version: 2.1
+  build-deploy:
+    jobs:
+      - build
