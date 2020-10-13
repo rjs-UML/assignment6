@@ -18,15 +18,12 @@ jobs:
             do
               nc -z 127.0.0.1 3306 && echo Success && exit 0
               echo -n .
-              sleep 30
+              sleep 10
             done
             echo Failed waiting for MySQL && exit 1    
       - run:
           name: Install MySQL CLI and log in as monty
           command: sudo apt-get install default-mysql-client
-      - run:
-          name: Log in as monty 
-          command: mysql -h 127.0.0.1 -u monty -psome_pass 
       - run: echo "hello cruel world" # run the `echo` command 
       - run: mvn test
       - store_test_results:
