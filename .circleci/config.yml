@@ -5,8 +5,6 @@ jobs:
       - image: 'circleci/openjdk:latest' # the primary container, where your job's commands are run
       - image: circleci/mysql:8.0.21
         environment:
-          # MYSQL_ROOT_PASSWORD: Rynomite@83
-          # MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: stocks
           MYSQL_USER: monty
           MYSQL_PASSWORD: some_pass      
@@ -20,12 +18,14 @@ jobs:
             do
               nc -z 127.0.0.1 3306 && echo Success && exit 0
               echo -n .
-              sleep 3m 
+              sleep 3m
             done
             echo Failed waiting for MySQL && exit 1    
       - run:
-          name: Install MySQL CLI; Import dummy data; run an example query
-          command: sudo apt-get install default-mysql-client  
+          name: Install MySQL CLI and log in as monty
+          command: |
+            sudo apt-get install default-mysql-client
+            mysql -u monty -psome_pass 
       - run: echo "hello cruel world" # run the `echo` command 
       - run: mvn test
       - store_test_results:
