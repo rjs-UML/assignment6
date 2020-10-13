@@ -1,5 +1,6 @@
 package edu.rseymour.advancedjava.services;
 
+import edu.rseymour.advancedjava.model.DatabasesAccessObject;
 import edu.rseymour.advancedjava.model.StockData;
 import edu.rseymour.advancedjava.model.StockQuote;
 import edu.rseymour.advancedjava.util.DatabaseConnectionException;

@@ -45,7 +45,7 @@ public class DatabaseStockServiceTest {
     }
 
     @Test
-    public void testGetQuoteWithinRange()  throws Exception {
+    public void testGetQuoteWithinRange() throws Exception {
 
         String fromDateString = "2015-02-10 00:01:01";
         String endDateString = "2015-02-10 00:08:01";
