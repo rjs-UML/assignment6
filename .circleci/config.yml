@@ -5,10 +5,11 @@ jobs:
       - image: 'circleci/openjdk:latest' # the primary container, where your job's commands are run
       - image: circleci/mysql:8.0.21
         environment:
-          JDBC_DRIVER: com.mysql.jdbc.Driver
-          DB_URL: jdbc:mysql://localhost:3306/stocks?useSSL=false&serverTimezone=EST
-          USER: monty
-          PASS: some_pass      
+          MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+          MYSQL_DATABASE: stocks
+          MYSQL_USER: monty
+          MYSQL_PASSWORD: some_pass
+#          MYSQL_INITDB_SKIP_TZINFO
     steps:
       - checkout # check out the code in the project directory
       - run:
