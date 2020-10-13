@@ -28,4 +28,4 @@ jobs:
       - store_test_results:
           path: target/surefire-reports
       - store_artifacts:
-          path: target/my-reportsversion: 2.1
+          path: target/my-reports
