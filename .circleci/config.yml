@@ -22,9 +22,9 @@ jobs:
               sleep 5
             done
             echo Failed waiting for MySQL && exit 1    
-      - run:
-          name: Install MySQL CLI
-          command: sudo apt-get install default-mysql-client
+#      - run:
+#          name: Install MySQL CLI
+#          command: sudo apt-get install default-mysql-client
       - run: echo "hello cruel world" # run the `echo` command
       - run: mvn test
       - store_test_results:
