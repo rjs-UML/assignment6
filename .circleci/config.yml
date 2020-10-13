@@ -12,7 +12,6 @@ jobs:
           MYSQL_DATABASE: stocks
           MYSQL_USER: monty
           MYSQL_PASSWORD: some_pass
-          MYSQL_INITDB_SKIP_TZINFO
     steps:
       - checkout # check out the code in the project directory
       - run:
