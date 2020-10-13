@@ -10,8 +10,11 @@ jobs:
           MYSQL_USER: monty
           MYSQL_PASSWORD: some_pass
     steps:
-     - run: sudo apt-get install default-mysql-client
-     - run: echo "is this working or what?"
+     - run:
+        name: Wait for Database Connection
+        # preinstalled in circleci/* docker image
+        command: dockerize -wait tcp://localhost:3306 -timeout 1m
+     - run: echo "I hope this works"
   Java:
     docker:
       - image: 'circleci/openjdk:latest' # the primary container, where your job's commands are run
