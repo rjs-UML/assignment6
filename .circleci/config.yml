@@ -10,7 +10,7 @@ jobs:
           MYSQL_USER: monty
           MYSQL_PASSWORD: some_pass
     steps:
-     - run: mysql -h 127.0.0.1 -u monty -psome_pass stocks
+     - run: echo "is this working or what?"
   Java:
     docker:
       - image: 'circleci/openjdk:latest' # the primary container, where your job's commands are run
