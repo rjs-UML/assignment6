@@ -10,6 +10,7 @@ jobs:
           MYSQL_USER: monty
           MYSQL_PASSWORD: some_pass
     steps:
+     - run: sudo apt-get install default-mysql-client
      - run: echo "is this working or what?"
   Java:
     docker:
