@@ -19,13 +19,16 @@ jobs:
             do
               nc -z 127.0.0.1 3306 && echo Success && exit 0
               echo -n .
-              sleep 10
+              sleep 5
             done
             echo Failed waiting for MySQL && exit 1    
       - run:
           name: Install MySQL CLI
           command: sudo apt-get install default-mysql-client
-      - run: echo "hello cruel world" # run the `echo` command 
+      - run:
+          name: Log in as monty
+          command: mysql -u monty -psome_pass stocks
+      - run: echo "hello cruel world" # run the `echo` command
       - run: mvn test
       - store_test_results:
           path: target/surefire-reports
