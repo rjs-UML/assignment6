@@ -3,9 +3,9 @@ jobs:
   build:
     docker:
       - image: 'circleci/openjdk:latest' # the primary container, where your job's commands are run
-        environment:
-          JDBC_DRIVER: com.mysql.jdbc.Driver
-          DB_URL: jdbc:mysql://localhost:3306/stocks?useSSL=false&serverTimezone=EST
+#        environment:
+#          JDBC_DRIVER: com.mysql.jdbc.Driver
+#          DB_URL: jdbc:mysql://localhost:3306/stocks?useSSL=false&serverTimezone=EST
       - image: circleci/mysql:8.0.21
         environment:
           MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
