@@ -20,7 +20,7 @@ public class DatabaseUtils {
 
     // hard-coded JDBC information
     private final static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private final static String DB_URL = "jdbc:mysql://localhost:3306/stocks?useSSL=false&serverTimezone=EST&allowPublicKeyRetrieval=true";
+    private final static String DB_URL = "jdbc:mysql://localhost:3306/stocks?useSSL=false&serverTimezone=EST&AllowPublicKeyRetrieval=True";
 
     // hard-coded db creds
     private static final String USER = "monty";
